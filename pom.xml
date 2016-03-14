@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <groupId>nl.codenizer.sonar-typescript</groupId>
+    <artifactId>tools.sonarqube.idemetadata</artifactId>
+    <packaging>sonar-plugin</packaging>
+    <version>0.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>5.4.</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.sonar</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginKey>idemetadata</pluginKey>
+                    <pluginClass>codenizer.sonarqube.typescript.TypeScriptPlugin</pluginClass>
+                    <pluginName>Sonar TypeScript plugin</pluginName>
+                    <pluginDescription>Gathers and displays core metrics from TypeScript files.</pluginDescription>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
