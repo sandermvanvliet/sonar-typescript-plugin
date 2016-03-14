@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import codenizer.sonarqube.typescript.*;
 
@@ -14,7 +15,19 @@ public class WhenParsingAnalysisResultsFromFileTest {
   
     @Test
     public void GivenAnEmptyPathThenExceptionIsThrown() {
-        thrown.expect(IllegalArgumentException.class);
-        AnalysisResultParser.FromFile(null);
+        try {
+            AnalysisResultParser.FromFile(null);
+        } catch(Exception ex) {
+            assert(ex instanceof IllegalArgumentException);
+        }
+    }
+    
+    @Test
+    public void GivenTheFileDoesNotExistThenAFileNotFoundExceptionIsThrown() {
+        try {
+            AnalysisResultParser.FromFile("src/test/resources/empty_result_file.json");
+        } catch(Exception ex){
+            assert(ex instanceof FileNotFoundException);
+        }
     }
 }
