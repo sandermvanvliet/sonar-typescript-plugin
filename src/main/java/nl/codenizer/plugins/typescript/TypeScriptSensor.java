@@ -68,6 +68,8 @@ public class TypeScriptSensor implements Sensor {
     
     private void saveMainInfo(SensorContext sensorContext, AnalysisResult analysisResult) {
         sensorContext.saveMeasure(CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
+        sensorContext.saveMeasure(CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
+        sensorContext.saveMeasure(CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
         
         log.debug("measures saved");
     }
