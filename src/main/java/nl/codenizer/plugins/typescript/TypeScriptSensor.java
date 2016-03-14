@@ -52,15 +52,14 @@ public class TypeScriptSensor implements Sensor {
 
         log.info("Analysing project root in search for TypeScript files: " + rootDir.getAbsolutePath());
 
-        //EclipseAnalyzer analyzer = new EclipseAnalyzer(rootDir);
-        //ProjectInfo projectInfo;
-
+        AnalysisRunner runner = new AnalysisRunner(rootDir.getAbsolutePath());
+        
         try {
-            //projectInfo = analyzer.analyze();
+            AnalysisResult result = runner.Execute();
 
             log.info("Analysis done");
             
-            saveMainInfo(sensorContext, null);
+            saveMainInfo(sensorContext, result);
         } catch (Exception ae) {
             log.error("Error while running Analyzer", ae);
         }
