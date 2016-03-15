@@ -53,6 +53,13 @@ public class WhenParsingAnalysisResultsFromFileTest {
         assertThat(result.getNumberOfLines()).isEqualTo(4567);
     }
     
+    @Test
+    public void GivenAValidFileThenTheFileNameIsSet() {
+        AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
+        
+        assertThat(result.getFileName()).isEqualTo("tests/file_a.ts");
+    }
+    
     private AnalysisResult ParseFromFile(String path) {
         AnalysisResult result = null;
         
