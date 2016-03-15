@@ -60,8 +60,27 @@ public class WhenParsingAnalysisResultsFromFileTest {
         assertThat(result.getFileName()).isEqualTo("tests/file_a.ts");
     }
     
+    @Test
+    public void GivenAFileWithMultipleResultsThenAllResultsAreReturned() {
+        AnalysisResult[] results = ParseAllFromFile("src/test/resources/many_results.json");
+        
+        assertThat(results.length).isEqualTo(10);
+    }
+    
     private AnalysisResult ParseFromFile(String path) {
         AnalysisResult result = null;
+        
+        try {
+            result = AnalysisResultParser.FromFile(path)[0];
+        } catch(Exception ex) {
+            
+        }
+        
+        return result;
+    }
+    
+    private AnalysisResult[] ParseAllFromFile(String path) {
+        AnalysisResult[] result = null;
         
         try {
             result = AnalysisResultParser.FromFile(path);

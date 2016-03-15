@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 import com.google.gson.Gson;
 
 public class AnalysisResultParser {
-    public static AnalysisResult FromFile(String path) throws IllegalArgumentException, java.io.FileNotFoundException, java.io.IOException {
+    public static AnalysisResult[] FromFile(String path) throws IllegalArgumentException, java.io.FileNotFoundException, java.io.IOException {
         if(path == null) {
             throw new IllegalArgumentException();
         }
@@ -23,7 +23,7 @@ public class AnalysisResultParser {
         
         Gson gson = new Gson();
         
-        return gson.fromJson(fileContents, AnalysisResult.class);
+        return gson.fromJson(fileContents, AnalysisResult[].class);
     }
     
     static String readFile(String path, Charset encoding) throws java.io.IOException {

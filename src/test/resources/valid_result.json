@@ -1,6 +1,8 @@
-{
-    "fileName": "tests/file_a.ts",
-    "numberOfClasses": 10,
-    "numberOfMethods": 123,
-    "numberOfLines": 4567
-}
+[
+    {
+        "fileName": "tests/file_a.ts",
+        "numberOfClasses": 10,
+        "numberOfMethods": 123,
+        "numberOfLines": 4567
+    }
+]
