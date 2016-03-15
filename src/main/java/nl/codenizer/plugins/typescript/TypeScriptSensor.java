@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
@@ -40,7 +42,7 @@ public class TypeScriptSensor implements Sensor {
             log.info("Analysis done, saving metrics");
             
             for(AnalysisResult r: result) {
-                saveMainInfo(sensorContext, r);
+                saveCoreMetrics(sensorContext, r, rootDir.getAbsolutePath());
             }
             
             log.info("Metrics saved");
@@ -49,10 +51,12 @@ public class TypeScriptSensor implements Sensor {
         }
     }
     
-    private void saveMainInfo(SensorContext sensorContext, AnalysisResult analysisResult) {
-        sensorContext.saveMeasure(CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
-        sensorContext.saveMeasure(CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
-        sensorContext.saveMeasure(CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
+    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, String rootDir) {
+        InputFile file = new DefaultInputFile("someModule", analysisResult.getFileName());
+         
+        sensorContext.saveMeasure(file, CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
+        sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
+        sensorContext.saveMeasure(file, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
         
         log.debug("measures saved");
     }
