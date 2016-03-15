@@ -15,11 +15,13 @@ import org.sonar.api.resources.Project;
 
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
+    private final AnalysisRunner analysisRunner;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public TypeScriptSensor(FileSystem fileSystem) {
+    public TypeScriptSensor(FileSystem fileSystem, AnalysisRunner analysisRunner) {
         this.fileSystem = fileSystem;
+        this.analysisRunner = analysisRunner;
     }
     
     public boolean shouldExecuteOnProject(Project project) {
@@ -31,15 +33,13 @@ public class TypeScriptSensor implements Sensor {
         File rootDir = fileSystem.baseDir();
 
         log.info("Analysing project root in search for TypeScript files: " + rootDir.getAbsolutePath());
-
-        AnalysisRunner runner = new AnalysisRunner(rootDir.getAbsolutePath());
         
         try {
-            AnalysisResult result = runner.Execute();
+            AnalysisResult[] result = this.analysisRunner.Execute(rootDir.getAbsolutePath());
 
             log.info("Analysis done");
             
-            saveMainInfo(sensorContext, result);
+            saveMainInfo(sensorContext, result[0]);
         } catch (Exception ae) {
             log.error("Error while running Analyzer", ae);
         }
