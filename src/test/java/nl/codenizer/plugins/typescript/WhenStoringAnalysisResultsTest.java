@@ -51,10 +51,28 @@ public class WhenStoringAnalysisResultsTest {
         verify(sensorContext, Mockito.times(1)).saveMeasure(CoreMetrics.LINES, 4567.0);
     }
     
+    @Test
+    public void GivenManyResultsThenAllResultMetricsAreStored() {
+        SensorContext sensorContext = GivenASensorContext();
+        WhenRunningTheSensorForMultipleFiles(sensorContext);
+        
+        verify(sensorContext, Mockito.times(10)).saveMeasure(CoreMetrics.CLASSES, 10.0);
+    }
+    
     private void WhenRunningTheSensor(SensorContext sensorContext) {
         FileSystem mockedFileSystem = GivenAFileSystem();
         AnalysisRunner analysisRunner = mock(AnalysisRunner.class);
         when(analysisRunner.Execute(any(String.class))).thenReturn(GivenAnArrayWithOneResult());
+        TypeScriptSensor sensor = new TypeScriptSensor(mockedFileSystem, analysisRunner);
+        Project project = new Project("TypeScriptProject");
+        
+        sensor.analyse(project, sensorContext);
+    }
+    
+    private void WhenRunningTheSensorForMultipleFiles(SensorContext sensorContext) {
+        FileSystem mockedFileSystem = GivenAFileSystem();
+        AnalysisRunner analysisRunner = mock(AnalysisRunner.class);
+        when(analysisRunner.Execute(any(String.class))).thenReturn(GivenAnArrayWithMultipleResults());
         TypeScriptSensor sensor = new TypeScriptSensor(mockedFileSystem, analysisRunner);
         Project project = new Project("TypeScriptProject");
         
@@ -76,6 +94,14 @@ public class WhenStoringAnalysisResultsTest {
     private AnalysisResult[] GivenAnArrayWithOneResult() {
         try {
             return AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
+        } catch(Exception ex) {
+            return null;
+        }
+    }
+    
+    private AnalysisResult[] GivenAnArrayWithMultipleResults() {
+        try {
+            return AnalysisResultParser.FromFile("src/test/resources/many_results.json");
         } catch(Exception ex) {
             return null;
         }

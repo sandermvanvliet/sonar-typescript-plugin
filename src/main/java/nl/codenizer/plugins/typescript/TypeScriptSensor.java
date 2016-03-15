@@ -37,9 +37,13 @@ public class TypeScriptSensor implements Sensor {
         try {
             AnalysisResult[] result = this.analysisRunner.Execute(rootDir.getAbsolutePath());
 
-            log.info("Analysis done");
+            log.info("Analysis done, saving metrics");
             
-            saveMainInfo(sensorContext, result[0]);
+            for(AnalysisResult r: result) {
+                saveMainInfo(sensorContext, r);
+            }
+            
+            log.info("Metrics saved");
         } catch (Exception ae) {
             log.error("Error while running Analyzer", ae);
         }
