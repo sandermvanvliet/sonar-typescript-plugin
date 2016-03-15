@@ -7,6 +7,7 @@ import org.junit.rules.ExpectedException;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import static org.fest.assertions.Assertions.assertThat;
 import codenizer.sonarqube.typescript.*;
 
 public class WhenParsingAnalysisResultsFromFileTest {
@@ -18,7 +19,7 @@ public class WhenParsingAnalysisResultsFromFileTest {
         try {
             AnalysisResultParser.FromFile(null);
         } catch(Exception ex) {
-            assert(ex instanceof IllegalArgumentException);
+            assertThat(ex).isInstanceOf(IllegalArgumentException.class);
         }
     }
     
@@ -27,46 +28,40 @@ public class WhenParsingAnalysisResultsFromFileTest {
         try {
             AnalysisResultParser.FromFile("src/test/resources/empty_result_file.json");
         } catch(Exception ex){
-            assert(ex instanceof FileNotFoundException);
+            assertThat(ex).isInstanceOf(FileNotFoundException.class);
         }
     }
     
     @Test
     public void GivenAValidFileThenTheNumberOfClassesIsSet() {
-        AnalysisResult result = null;
+        AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
         
-        try {
-            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
-        } catch(Exception ex) {
-            
-        }
-        
-        assert(result.getNumberOfClasses() == 10);
+        assertThat(result.getNumberOfClasses()).isEqualTo(10);
     }
     
     @Test
     public void GivenAValidFileThenTheNumberOfMethodsIsSet() {
-        AnalysisResult result = null;
+        AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
         
-        try {
-            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
-        } catch(Exception ex) {
-            
-        }
-        
-        assert(result.getNumberOfMethods() == 123);
+        assertThat(result.getNumberOfMethods()).isEqualTo(123);
     }
     
     @Test
     public void GivenAValidFileThenTheNumberOfLinesIsSet() {
+        AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
+        
+        assertThat(result.getNumberOfLines()).isEqualTo(4567);
+    }
+    
+    private AnalysisResult ParseFromFile(String path) {
         AnalysisResult result = null;
         
         try {
-            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
+            result = AnalysisResultParser.FromFile(path);
         } catch(Exception ex) {
             
         }
         
-        assert(result.getNumberOfLines() == 4567);
+        return result;
     }
 }
