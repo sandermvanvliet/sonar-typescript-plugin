@@ -30,4 +30,43 @@ public class WhenParsingAnalysisResultsFromFileTest {
             assert(ex instanceof FileNotFoundException);
         }
     }
+    
+    @Test
+    public void GivenAValidFileThenTheNumberOfClassesIsSet() {
+        AnalysisResult result = null;
+        
+        try {
+            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
+        } catch(Exception ex) {
+            
+        }
+        
+        assert(result.getNumberOfClasses() == 10);
+    }
+    
+    @Test
+    public void GivenAValidFileThenTheNumberOfMethodsIsSet() {
+        AnalysisResult result = null;
+        
+        try {
+            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
+        } catch(Exception ex) {
+            
+        }
+        
+        assert(result.getNumberOfMethods() == 123);
+    }
+    
+    @Test
+    public void GivenAValidFileThenTheNumberOfLinesIsSet() {
+        AnalysisResult result = null;
+        
+        try {
+            result = AnalysisResultParser.FromFile("src/test/resources/valid_result.json");
+        } catch(Exception ex) {
+            
+        }
+        
+        assert(result.getNumberOfLines() == 4567);
+    }
 }
