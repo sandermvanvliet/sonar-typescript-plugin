@@ -17,8 +17,7 @@ public class AnalysisRunnerImpl implements AnalysisRunner {
            // 3) Parse result file
            
            String[] commands = new String[] {
-               "node",
-               "analyzer.js",
+               "tsa",
                "**/*.ts"    /* we can specify this glob because we're already in the source directory */
            };
            
