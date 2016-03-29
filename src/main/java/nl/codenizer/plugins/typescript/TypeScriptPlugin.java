@@ -11,7 +11,7 @@ public class TypeScriptPlugin extends SonarPlugin {
         super();
     }
     
-    public List<Class<? extends Extension>> getExtensions() {
-        return Arrays.asList();
+    public List getExtensions() {
+        return Arrays.asList(TypeScriptSensor.class);
     }
 }

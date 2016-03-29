@@ -1,24 +1,24 @@
 package codenizer.sonarqube.typescript;
 
 public class AnalysisResult {
-    private int numberOfClasses;
-    private int numberOfMethods;
-    private int numberOfLines;
-    private String fileName;
+    private String FileName;
+    private int NumberOfClasses;
+    private int NumberOfMethods;
+    private int NumberOfLines;
     
     public int getNumberOfClasses() {
-        return this.numberOfClasses;
+        return this.NumberOfClasses;
     }
     
     public int getNumberOfMethods() {
-        return this.numberOfMethods;
+        return this.NumberOfMethods;
     }
     
     public int getNumberOfLines() {
-        return this.numberOfLines;
+        return this.NumberOfLines;
     }
     
     public String getFileName() {
-        return this.fileName;
+        return this.FileName;
     }
 }

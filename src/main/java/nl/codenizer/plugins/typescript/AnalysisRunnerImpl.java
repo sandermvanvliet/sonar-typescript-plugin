@@ -16,14 +16,20 @@ public class AnalysisRunnerImpl implements AnalysisRunner {
            // 2) Call analyzer.js
            // 3) Parse result file
            
+           log.info("Initializing commands");
+           
            String[] commands = new String[] {
                "tsa",
                "**/*.ts"    /* we can specify this glob because we're already in the source directory */
            };
            
+           log.info("Starting tsa...");
+           
            Process p = Runtime.getRuntime().exec(commands, null /* inherit env */, new File(projectRootDirectory));
            
            int exitCode = p.waitFor();
+           
+           log.info("exitCode: " + exitCode);
            
            if(exitCode != 0) {
                log.error("Running analyzer failed with exit code " + exitCode);

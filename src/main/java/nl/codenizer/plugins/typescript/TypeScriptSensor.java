@@ -17,13 +17,17 @@ import org.sonar.api.resources.Project;
 
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
-    private final AnalysisRunner analysisRunner;
+    private AnalysisRunner analysisRunner;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public TypeScriptSensor(FileSystem fileSystem, AnalysisRunner analysisRunner) {
+    public TypeScriptSensor(FileSystem fileSystem) {
         this.fileSystem = fileSystem;
-        this.analysisRunner = analysisRunner;
+        this.analysisRunner = new AnalysisRunnerImpl();
+    }
+    
+    public void setAnalysisRunner(AnalysisRunner runner) {
+        this.analysisRunner = runner;
     }
     
     public boolean shouldExecuteOnProject(Project project) {
@@ -40,22 +44,33 @@ public class TypeScriptSensor implements Sensor {
             AnalysisResult[] result = this.analysisRunner.Execute(rootDir.getAbsolutePath());
 
             log.info("Analysis done, saving metrics");
+            log.info("Got " + result.length + " metrics");
             
+            saveCoreMetrics(sensorContext, result[0], rootDir.getAbsolutePath());
+            /*
             for(AnalysisResult r: result) {
                 saveCoreMetrics(sensorContext, r, rootDir.getAbsolutePath());
             }
+            */
             
             log.info("Metrics saved");
         } catch (Exception ae) {
-            log.error("Error while running Analyzer", ae);
+            log.error("Error while running Analyzer: " + ae.getMessage(), ae);
         }
     }
     
     private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, String rootDir) {
         InputFile file = new DefaultInputFile("someModule", analysisResult.getFileName());
+         //log.info("found file: " + file.absolutePath());
+         log.info("saving metrics for file " + analysisResult.getFileName());
          
+         log.info("trying to save CoreMetrics.CLASSES");
         sensorContext.saveMeasure(file, CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
+        
+         log.info("trying to save CoreMetrics.FUNCTIONS");
         sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
+        
+         log.info("trying to save CoreMetrics.LINES");
         sensorContext.saveMeasure(file, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
         
         log.debug("measures saved");
