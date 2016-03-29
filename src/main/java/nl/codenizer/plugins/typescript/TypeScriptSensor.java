@@ -14,6 +14,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
@@ -61,14 +62,23 @@ public class TypeScriptSensor implements Sensor {
          //log.info("found file: " + file.absolutePath());
          log.info("saving metrics for file " + analysisResult.getFileName());
          
+         Resource resource = sensorContext.getResource(file);
+         
+         if(resource != null) {
+             log.info("Found resource with language: " + resource.getLanguage());
+         }
+         
          log.info("trying to save CoreMetrics.CLASSES");
-        sensorContext.saveMeasure(file, CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
+        sensorContext.saveMeasure(resource, CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
         
          log.info("trying to save CoreMetrics.FUNCTIONS");
-        sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
+        sensorContext.saveMeasure(resource, CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
         
          log.info("trying to save CoreMetrics.LINES");
-        sensorContext.saveMeasure(file, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
+        sensorContext.saveMeasure(resource, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
+        
+        log.info("trying to save CoreMetrics.NCLOC");
+        sensorContext.saveMeasure(resource, CoreMetrics.NCLOC, (double)analysisResult.getNumberOfLines());
         
         log.debug("measures saved");
     }
