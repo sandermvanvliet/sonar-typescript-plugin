@@ -46,12 +46,9 @@ public class TypeScriptSensor implements Sensor {
             log.info("Analysis done, saving metrics");
             log.info("Got " + result.length + " metrics");
             
-            saveCoreMetrics(sensorContext, result[0], rootDir.getAbsolutePath());
-            /*
             for(AnalysisResult r: result) {
                 saveCoreMetrics(sensorContext, r, rootDir.getAbsolutePath());
             }
-            */
             
             log.info("Metrics saved");
         } catch (Exception ae) {
