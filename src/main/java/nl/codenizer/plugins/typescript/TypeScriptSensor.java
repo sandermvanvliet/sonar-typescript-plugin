@@ -16,6 +16,8 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
+import com.google.common.collect.Lists;
+
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
     private AnalysisRunner analysisRunner;
@@ -32,11 +34,18 @@ public class TypeScriptSensor implements Sensor {
     }
     
     public boolean shouldExecuteOnProject(Project project) {
-        // this sensor is executed on any type of project
-        return true;
+        // Only run if TypeScript files have been detected
+        return this.fileSystem.hasFiles(this.fileSystem.predicates().hasLanguage(TypeScript.KEY));
     }
     
     public void analyse(Project project, SensorContext sensorContext) {
+        Iterable<File> filesToAnalyze = GetFilesToAnalyze(this.fileSystem);
+        
+        for(File f: filesToAnalyze) {
+            log.info("Will analyze " + f.getName());
+        }
+        
+        
         File rootDir = fileSystem.baseDir();
 
         log.info("Analysing project root in search for TypeScript files: " + rootDir.getAbsolutePath());
@@ -68,19 +77,33 @@ public class TypeScriptSensor implements Sensor {
              log.info("Found resource with language: " + resource.getLanguage());
          }
          
-         log.info("trying to save CoreMetrics.CLASSES");
+         log.debug("trying to save CoreMetrics.CLASSES");
         sensorContext.saveMeasure(resource, CoreMetrics.CLASSES, (double)analysisResult.getNumberOfClasses());
         
-         log.info("trying to save CoreMetrics.FUNCTIONS");
+         log.debug("trying to save CoreMetrics.FUNCTIONS");
         sensorContext.saveMeasure(resource, CoreMetrics.FUNCTIONS, (double)analysisResult.getNumberOfMethods());
         
-         log.info("trying to save CoreMetrics.LINES");
+         log.debug("trying to save CoreMetrics.LINES");
         sensorContext.saveMeasure(resource, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
         
-        log.info("trying to save CoreMetrics.NCLOC with value " + analysisResult.getLinesOfCode());
+        log.debug("trying to save CoreMetrics.NCLOC with value " + analysisResult.getLinesOfCode());
         sensorContext.saveMeasure(resource, CoreMetrics.NCLOC, (double)analysisResult.getLinesOfCode());
         
         log.debug("measures saved");
+    }
+    
+    private Iterable<File> GetFilesToAnalyze(FileSystem fs) {
+         Iterable<InputFile> files = fs.inputFiles(fs.predicates().hasLanguage(TypeScript.KEY));
+         
+         return toFile(files);
+    }
+    
+    private static Iterable<File> toFile(Iterable<InputFile> inputFiles) {
+        List<File> files = Lists.newArrayList();
+        for (InputFile inputFile : inputFiles) {
+        files.add(inputFile.file());
+        }
+        return files;
     }
     
     public String toString() {
