@@ -77,8 +77,8 @@ public class TypeScriptSensor implements Sensor {
          log.info("trying to save CoreMetrics.LINES");
         sensorContext.saveMeasure(resource, CoreMetrics.LINES, (double)analysisResult.getNumberOfLines());
         
-        log.info("trying to save CoreMetrics.NCLOC");
-        sensorContext.saveMeasure(resource, CoreMetrics.NCLOC, (double)analysisResult.getNumberOfLines());
+        log.info("trying to save CoreMetrics.NCLOC with value " + analysisResult.getLinesOfCode());
+        sensorContext.saveMeasure(resource, CoreMetrics.NCLOC, (double)analysisResult.getLinesOfCode());
         
         log.debug("measures saved");
     }

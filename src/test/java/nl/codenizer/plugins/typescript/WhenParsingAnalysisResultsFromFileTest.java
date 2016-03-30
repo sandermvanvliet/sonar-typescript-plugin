@@ -54,6 +54,13 @@ public class WhenParsingAnalysisResultsFromFileTest {
     }
     
     @Test
+    public void GivenAValidFileThenTheLinesOfCodeIsSet() {
+        AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
+        
+        assertThat(result.getLinesOfCode()).isEqualTo(4560);
+    }
+    
+    @Test
     public void GivenAValidFileThenTheFileNameIsSet() {
         AnalysisResult result = ParseFromFile("src/test/resources/valid_result.json");
         

@@ -5,6 +5,7 @@ public class AnalysisResult {
     private int NumberOfClasses;
     private int NumberOfMethods;
     private int NumberOfLines;
+    private int LinesOfCode;
     
     public int getNumberOfClasses() {
         return this.NumberOfClasses;
@@ -20,5 +21,9 @@ public class AnalysisResult {
     
     public String getFileName() {
         return this.FileName;
+    }
+    
+    public int getLinesOfCode() {
+        return this.LinesOfCode;
     }
 }

@@ -3,60 +3,70 @@
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     },
     {
         "FileName": "tests/file_a.ts",
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
-        "NumberOfLines": 4567
+        "NumberOfLines": 4567,
+        "LinesOfCode": 4560
     }
 ]
