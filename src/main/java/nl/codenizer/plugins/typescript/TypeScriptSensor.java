@@ -3,6 +3,7 @@ package codenizer.sonarqube.typescript;
 import java.util.Arrays;
 import java.util.List;
 import java.io.File;
+import java.lang.String;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
 import com.google.common.collect.Lists;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
@@ -43,8 +46,7 @@ public class TypeScriptSensor implements Sensor {
         
         for(File f: filesToAnalyze) {
             log.info("Will analyze " + f.getName());
-        }
-        
+        }        
         
         File rootDir = fileSystem.baseDir();
 
@@ -62,7 +64,8 @@ public class TypeScriptSensor implements Sensor {
             
             log.info("Metrics saved");
         } catch (Exception ae) {
-            log.error("Error while running Analyzer: " + ae.getMessage(), ae);
+            log.error("Error while running Analyzer:", ae);
+            ae.printStackTrace(System.out);
         }
     }
     
