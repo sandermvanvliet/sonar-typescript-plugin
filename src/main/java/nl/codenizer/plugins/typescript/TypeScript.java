@@ -11,12 +11,12 @@ import org.sonar.api.resources.AbstractLanguage;
 public class TypeScript extends AbstractLanguage {
     
   /**
-   * Java key
+   * TypeScript key
    */
   public static final String KEY = "typescript";
 
   /**
-   * Java name
+   * TypeScript name
    */
   public static final String NAME = "TypeScript";
 
@@ -27,12 +27,12 @@ public class TypeScript extends AbstractLanguage {
   public static final String FILE_SUFFIXES_KEY = "sonar.typescript.file.suffixes";
 
   /**
-   * Default Java files knows suffixes
+   * Default TypeScript files knows suffixes
    */
   public static final String DEFAULT_FILE_SUFFIXES = ".ts";
 
   /**
-   * Key of the java version used for sources
+   * Key of the TypeScript version used for sources
    */
   public static final String SOURCE_VERSION = "sonar.typescript.source";
 
