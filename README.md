@@ -1,4 +1,6 @@
 # Sonar TypeScript plugin
+[![Build Status](https://travis-ci.org/sandermvanvliet/sonar-typescript-plugin.svg?branch=master)](https://travis-ci.org/sandermvanvliet/sonar-typescript-plugin)
+
 This is a plugin for SonarQube to analyze TypeScript source code. It uses [tsa](http://github.com/sandermvanvliet/tsa) to run the analysis.
 
 Currently this plugin supports the following metrics:
