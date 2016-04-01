@@ -8,7 +8,7 @@ deploy:
   skip_cleanup: true
   api_key:
     secure: eqG2IlYHYdjNoglsIMoaoFIKrWo96nQfqBjgSTe9SxU7cdtsJ5n6nOeprhwLNYhTEMEhZ0uSrBB7RDfkJWYyNc2/ssRwRu928oPrrsLF3kZjMDxM9kRrBUjUH2R/AfrleRw5ektlbjGSE4EK7j6UgYRIgmWWb4EBZQ1kCbolFmSsH6LsLT+1R0Vp6PSUGccMk2fWvof9A5oJz27kxwQRSCwyoWIaOkQY8btKH/O2OJL++qqkYSvoiQk+SuwtEwAwerK8nYC8ZdpjNudqIzQo1IqB5lku1p4CN6rvlE49bSsK5sjQdVCkwumYlUdNA4lA8Cxy06BZBZO7m7CZDFjKtiEIP59VTce1el+OtEw4/DDNYBYUWqP/kWnDirp/TxowwjTgUHr7rnwZQjrdJZ1VUTlzgbic9tBDNuuZYRU8sX+RC6VQqCVr7hQDWX9CzsCp/o6v46qc9WV/QQ5zBrtUcUjBOXg2OhzAHwm+Hgr6osTexVjF77u59R1SqLpIhYzw8xvM+A3BnFmv6w7wLgYbNMYR53zy+n2SivH26DHmuLijzL/+SvAz1stgslsOK9pmmtImTu2fbYIv5KfAkAMVHnyS/fC4i9+b2lrPZbOztwT9ePZTTWzzrNCPrxXxzZhwcgGMZ3xnARlxqeIEqGxh2jEzoTZ2B+KRI35l8diQgLs=
-  file: target/nl.codenizer.sonarqube.typescript.TypeScriptPlugin-0.2.jar
+  file: target/nl.codenizer.plugins.typescript.TypeScriptPlugin-0.2.jar
   on:
     repo: sandermvanvliet/sonar-typescript-plugin
 
