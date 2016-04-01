@@ -1,5 +1,7 @@
 package nl.codenizer.plugins.typescript;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.List;
 
@@ -45,10 +48,6 @@ class TypeScriptSensor implements Sensor {
     public void analyse(Project project, SensorContext sensorContext) {
         Iterable<File> filesToAnalyze = GetFilesToAnalyze(this.fileSystem);
 
-        for (File f : filesToAnalyze) {
-            log.info("Will analyze " + f.getName());
-        }
-
         File rootDir = fileSystem.baseDir();
 
         log.info("Analysing project root in search for TypeScript files: " + rootDir.getAbsolutePath());
@@ -60,7 +59,13 @@ class TypeScriptSensor implements Sensor {
             log.info("Got " + result.length + " metrics");
 
             for (AnalysisResult r : result) {
-                saveCoreMetrics(sensorContext, r);
+                File match = Iterables.find(filesToAnalyze, GetPredicateFor(r.getFileName()));
+
+                if(match != null) {
+                    saveCoreMetrics(sensorContext, r, match);
+                } else {
+                    log.info("Skipping " + r.getFileName() + " because it is not included in the analysis for this project");
+                }
             }
 
             log.info("Metrics saved");
@@ -70,16 +75,20 @@ class TypeScriptSensor implements Sensor {
         }
     }
 
-    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult) {
-        InputFile file = new DefaultInputFile("someModule", analysisResult.getFileName());
-        //log.info("found file: " + file.absolutePath());
+    private Predicate<File> GetPredicateFor(final String fileName) {
+        return new Predicate<File>() {
+            public boolean apply(@Nullable File file) {
+                return file.getName() == fileName;
+            }
+        };
+    }
+
+    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, File match) {
+        InputFile file = new DefaultInputFile("someModule", match.getName());
+
         log.info("saving metrics for file " + analysisResult.getFileName());
 
         Resource resource = sensorContext.getResource(file);
-
-        if (resource != null) {
-            log.info("Found resource with language: " + resource.language());
-        }
 
         log.debug("trying to save CoreMetrics.CLASSES");
         sensorContext.saveMeasure(resource, CoreMetrics.CLASSES, (double) analysisResult.getNumberOfClasses());
