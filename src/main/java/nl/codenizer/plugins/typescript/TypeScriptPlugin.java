@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.sonar.api.SonarPlugin;
 
-class TypeScriptPlugin extends SonarPlugin {
+public class TypeScriptPlugin extends SonarPlugin {
     public TypeScriptPlugin() {
         super();
     }
