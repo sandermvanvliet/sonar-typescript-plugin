@@ -11,3 +11,6 @@ deploy:
   file: target/codenizer.sonarqube.typescript.TypeScriptPlugin-0.2.jar
   on:
     repo: sandermvanvliet/sonar-typescript-plugin
+
+notifications:
+    email: false
