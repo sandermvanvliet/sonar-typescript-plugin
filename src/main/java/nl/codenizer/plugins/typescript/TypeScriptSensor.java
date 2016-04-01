@@ -54,7 +54,7 @@ class TypeScriptSensor implements Sensor {
             log.info("Got " + result.length + " metrics");
             
             for(AnalysisResult r: result) {
-                saveCoreMetrics(sensorContext, r, rootDir.getAbsolutePath());
+                saveCoreMetrics(sensorContext, r);
             }
             
             log.info("Metrics saved");
@@ -64,7 +64,7 @@ class TypeScriptSensor implements Sensor {
         }
     }
     
-    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, String rootDir) {
+    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult) {
         InputFile file = new DefaultInputFile("someModule", analysisResult.getFileName());
          //log.info("found file: " + file.absolutePath());
          log.info("saving metrics for file " + analysisResult.getFileName());
