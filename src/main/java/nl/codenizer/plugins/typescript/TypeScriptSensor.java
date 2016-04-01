@@ -72,7 +72,7 @@ class TypeScriptSensor implements Sensor {
          Resource resource = sensorContext.getResource(file);
          
          if(resource != null) {
-             log.info("Found resource with language: " + resource.getLanguage());
+             log.info("Found resource with language: " + resource.language());
          }
          
          log.debug("trying to save CoreMetrics.CLASSES");
