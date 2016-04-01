@@ -50,13 +50,10 @@ class TypeScriptSensor implements Sensor {
 
         File rootDir = fileSystem.baseDir();
 
-        log.info("Analysing project root in search for TypeScript files: " + rootDir.getAbsolutePath());
-
         try {
             AnalysisResult[] result = this.analysisRunner.Execute(rootDir.getAbsolutePath());
 
-            log.info("Analysis done, saving metrics");
-            log.info("Got " + result.length + " metrics");
+            log.debug("Analysis done, saving metrics");
 
             for (AnalysisResult r : result) {
                 File match = Iterables.find(filesToAnalyze, GetPredicateFor(r.getFileName()));
@@ -68,7 +65,7 @@ class TypeScriptSensor implements Sensor {
                 }
             }
 
-            log.info("Metrics saved");
+            log.debug("Metrics saved");
         } catch (Exception ae) {
             log.error("Error while running Analyzer:", ae);
             ae.printStackTrace(System.out);
@@ -86,7 +83,7 @@ class TypeScriptSensor implements Sensor {
     private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, File match) {
         InputFile file = new DefaultInputFile("someModule", match.getName());
 
-        log.info("saving metrics for file " + analysisResult.getFileName());
+        log.debug("saving metrics for file " + analysisResult.getFileName());
 
         Resource resource = sensorContext.getResource(file);
 
