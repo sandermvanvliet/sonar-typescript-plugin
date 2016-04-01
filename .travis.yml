@@ -1,4 +1,8 @@
 language: java
+
+before_deploy:
+    - mvn package
+
 deploy:
   provider: releases
   api_key:
