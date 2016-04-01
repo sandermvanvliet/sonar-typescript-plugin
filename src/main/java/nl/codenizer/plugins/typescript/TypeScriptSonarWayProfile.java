@@ -9,11 +9,11 @@ import org.sonar.api.utils.ValidationMessages;
  */
 class TypeScriptSonarWayProfile extends ProfileDefinition {
 
-  public TypeScriptSonarWayProfile() {
-  }
+    public TypeScriptSonarWayProfile() {
+    }
 
-  @Override
-  public RulesProfile createProfile(ValidationMessages messages) {
-      return RulesProfile.create("Sonar way", TypeScript.KEY);
-  }
+    @Override
+    public RulesProfile createProfile(ValidationMessages messages) {
+        return RulesProfile.create("Sonar way", TypeScript.KEY);
+    }
 }
