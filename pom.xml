@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>nl.codenizer.sonar-typescript</groupId>
-    <artifactId>codenizer.sonarqube.typescript.TypeScriptPlugin</artifactId>
+    <artifactId>nl.codenizer.sonarqube.typescript.TypeScriptPlugin</artifactId>
     <packaging>sonar-plugin</packaging>
     <version>0.2</version>
     
@@ -72,7 +72,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <pluginKey>sonartypescript</pluginKey>
-                    <pluginClass>codenizer.sonarqube.typescript.TypeScriptPlugin</pluginClass>
+                    <pluginClass>nl.codenizer.sonarqube.typescript.TypeScriptPlugin</pluginClass>
                     <pluginName>Sonar TypeScript plugin</pluginName>
                     <pluginDescription>Gathers and displays core metrics from TypeScript files.</pluginDescription>
                 </configuration>
