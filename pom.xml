@@ -8,7 +8,7 @@
     <groupId>nl.codenizer.sonar-typescript</groupId>
     <artifactId>codenizer.sonarqube.typescript.TypeScriptPlugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2</version>
     
     <properties>
         <sonar.version>5.1</sonar.version>

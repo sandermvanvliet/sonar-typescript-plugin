@@ -3,7 +3,7 @@ language: java
 deploy:
   provider: releases
   api_key: "8b90bee999c7c6e96adf7c673033eadf9aef1c3f"
-  file: "target/codenizer.sonarqube.typescript.TypeScriptPlugin-*.jar"
+  file: "target/codenizer.sonarqube.typescript.TypeScriptPlugin-0.2.jar"
   skip_cleanup: true
   on:
     tags: true
