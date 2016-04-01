@@ -1,6 +1,6 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
-public class AnalysisResult {
+class AnalysisResult {
     private String FileName;
     private int NumberOfClasses;
     private int NumberOfMethods;

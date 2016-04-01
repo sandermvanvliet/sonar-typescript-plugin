@@ -1,14 +1,10 @@
-package codenizer.sonarqube.typescript.tests;
+package nl.codenizer.plugins.typescript;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-
-import static org.fest.assertions.Assertions.assertThat;
-import codenizer.sonarqube.typescript.*;
 
 import org.mockito.Mockito;
 import static org.mockito.Mockito.any;
@@ -17,12 +13,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 
 public class WhenStoringAnalysisResultsTest {

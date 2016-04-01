@@ -1,12 +1,11 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.sonar.api.Extension;
 import org.sonar.api.SonarPlugin;
 
-public class TypeScriptPlugin extends SonarPlugin {
+class TypeScriptPlugin extends SonarPlugin {
     public TypeScriptPlugin() {
         super();
     }

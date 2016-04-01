@@ -1,5 +1,5 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
-public interface AnalysisRunner {
+interface AnalysisRunner {
     AnalysisResult[] Execute(String projectRootDirectory);
 }

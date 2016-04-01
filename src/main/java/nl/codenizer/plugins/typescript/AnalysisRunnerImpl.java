@@ -1,11 +1,11 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
 import java.io.File;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AnalysisRunnerImpl implements AnalysisRunner {    
+class AnalysisRunnerImpl implements AnalysisRunner {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     
     public AnalysisResult[] Execute(String projectRootDirectory) {

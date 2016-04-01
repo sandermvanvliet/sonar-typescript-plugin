@@ -1,6 +1,5 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
-import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -8,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
 
-public class TypeScript extends AbstractLanguage {
+class TypeScript extends AbstractLanguage {
     
   /**
    * TypeScript key
@@ -18,18 +17,18 @@ public class TypeScript extends AbstractLanguage {
   /**
    * TypeScript name
    */
-  public static final String NAME = "TypeScript";
+  private static final String NAME = "TypeScript";
 
 
   /**
    * Key of the file suffix parameter
    */
-  public static final String FILE_SUFFIXES_KEY = "sonar.typescript.file.suffixes";
+  private static final String FILE_SUFFIXES_KEY = "sonar.typescript.file.suffixes";
 
   /**
    * Default TypeScript files knows suffixes
    */
-  public static final String DEFAULT_FILE_SUFFIXES = ".ts";
+  private static final String DEFAULT_FILE_SUFFIXES = ".ts";
 
   /**
    * Key of the TypeScript version used for sources
@@ -54,7 +53,6 @@ public class TypeScript extends AbstractLanguage {
    *
    * @see org.sonar.api.resources.AbstractLanguage#getFileSuffixes()
    */
-  @Override
   public String[] getFileSuffixes() {
     String[] suffixes = filterEmptyStrings(settings.getStringArray(TypeScript.FILE_SUFFIXES_KEY));
     if (suffixes.length == 0) {

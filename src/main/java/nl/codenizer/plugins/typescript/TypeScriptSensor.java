@@ -1,6 +1,5 @@
-package codenizer.sonarqube.typescript;
+package nl.codenizer.plugins.typescript;
 
-import java.util.Arrays;
 import java.util.List;
 import java.io.File;
 
@@ -12,14 +11,12 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Iterables;
 
-public class TypeScriptSensor implements Sensor {
+class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
     private AnalysisRunner analysisRunner;
 
