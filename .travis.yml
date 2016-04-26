@@ -11,6 +11,8 @@ deploy:
   file: target/nl.codenizer.plugins.typescript.TypeScriptPlugin-0.2.jar
   on:
     repo: sandermvanvliet/sonar-typescript-plugin
+    all_branches: true
+    tags: true
 
 notifications:
     email: false
