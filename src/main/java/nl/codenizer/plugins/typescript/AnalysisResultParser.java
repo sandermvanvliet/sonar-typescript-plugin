@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-class AnalysisResultParser {
+public class AnalysisResultParser {
     public static AnalysisResult[] FromFile(String path) throws IllegalArgumentException, java.io.IOException {
         if (path == null) {
             throw new IllegalArgumentException();

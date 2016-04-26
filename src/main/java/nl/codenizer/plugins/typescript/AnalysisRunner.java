@@ -1,5 +1,5 @@
 package nl.codenizer.plugins.typescript;
 
-interface AnalysisRunner {
+public interface AnalysisRunner {
     AnalysisResult[] Execute(String projectRootDirectory);
 }

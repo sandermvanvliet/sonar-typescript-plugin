@@ -7,7 +7,7 @@ import org.sonar.api.resources.AbstractLanguage;
 
 import java.util.List;
 
-class TypeScript extends AbstractLanguage {
+public class TypeScript extends AbstractLanguage {
 
     /**
      * TypeScript key

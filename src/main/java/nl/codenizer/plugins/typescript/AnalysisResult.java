@@ -1,6 +1,6 @@
 package nl.codenizer.plugins.typescript;
 
-class AnalysisResult {
+public class AnalysisResult {
     private String FileName;
     private int NumberOfClasses;
     private int NumberOfMethods;

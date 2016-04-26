@@ -7,7 +7,7 @@ import org.sonar.api.utils.ValidationMessages;
 /**
  * Replacement for org.sonar.plugins.squid.SonarWayProfile
  */
-class TypeScriptSonarWayProfile extends ProfileDefinition {
+public class TypeScriptSonarWayProfile extends ProfileDefinition {
 
     public TypeScriptSonarWayProfile() {
     }

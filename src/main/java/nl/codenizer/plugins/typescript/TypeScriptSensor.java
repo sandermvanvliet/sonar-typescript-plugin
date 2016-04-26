@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 import java.io.File;
 import java.util.List;
 
-class TypeScriptSensor implements Sensor {
+public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private AnalysisRunner analysisRunner;
