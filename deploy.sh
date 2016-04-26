@@ -1,3 +1,4 @@
 #!/bin/sh
 
-cp target/codenizer.sonarqube.typescript.TypeScriptPlugin-0.1-SNAPSHOT.jar /opt/sonarqube-5.4/extensions/plugins
+cp target/nl.codenizer.plugins.typescript.TypeScriptPlugin-0.2.jar /opt/sonarqube-5.4/extensions/plugins
+
