@@ -17,6 +17,7 @@ import org.sonar.api.resources.Resource;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class TypeScriptSensor implements Sensor {
     private final FileSystem fileSystem;
@@ -56,7 +57,16 @@ public class TypeScriptSensor implements Sensor {
             log.debug("Analysis done, saving metrics");
 
             for (AnalysisResult r : result) {
-                File match = Iterables.find(filesToAnalyze, GetPredicateFor(r.getFileName()));
+                log.debug("Attempting to find " + r.getFileName());
+                File match = null;
+
+                try {
+                    Iterables.find(filesToAnalyze, GetPredicateFor(r.getFileName()));
+                }
+                catch(NoSuchElementException) {
+                    log.info("Skipping results for " + r.getFileName() + " because I couldn't find it in the files to analyze");
+                    continue;
+                }
 
                 if(match != null) {
                     saveCoreMetrics(sensorContext, r, match);
@@ -75,7 +85,8 @@ public class TypeScriptSensor implements Sensor {
     private Predicate<File> GetPredicateFor(final String fileName) {
         return new Predicate<File>() {
             public boolean apply(@Nullable File file) {
-                return file.getName() == fileName;
+                assert file != null;
+                return file.getName().equals(fileName);
             }
         };
     }
