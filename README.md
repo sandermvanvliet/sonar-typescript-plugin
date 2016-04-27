@@ -24,3 +24,11 @@ I'm open to pull requests and suggestions. If you feel something is missing, ple
 
 ### Author
 This plugin has been created by Sander van Vliet ([@Codenizer](https://twitter.com/Codenizer) on Twitter and [sandermvanvliet](https://github.com/sandermvanvliet) on GitHub).
+
+### Tools used
+Sonar TypeScript plugin is built with:
+
+* IntelliJ IDEA
+* Maven
+* VIM
+* Travis CI
