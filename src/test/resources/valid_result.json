@@ -4,6 +4,7 @@
         "NumberOfClasses": 10,
         "NumberOfMethods": 123,
         "NumberOfLines": 4567,
-        "LinesOfCode": 4560
+        "LinesOfCode": 4560,
+        "LinesOfComments": 789
     }
 ]

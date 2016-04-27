@@ -57,6 +57,13 @@ public class WhenParsingAnalysisResultsFromFileTest {
         
         assertThat(result.getLinesOfCode()).isEqualTo(4560);
     }
+
+    @Test
+    public void GivenAValidFileThenTheLinesOfCommentsIsSet() {
+        AnalysisResult result = ParseFromFile();
+
+        assertThat(result.getLinesOfComments()).isEqualTo(789);
+    }
     
     @Test
     public void GivenAValidFileThenTheFileNameIsSet() {
