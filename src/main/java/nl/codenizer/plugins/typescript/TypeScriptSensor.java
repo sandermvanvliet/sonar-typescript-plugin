@@ -1,22 +1,15 @@
 package nl.codenizer.plugins.typescript;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
 
-import javax.annotation.Nullable;
 import java.io.File;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TypeScriptSensor implements Sensor {
@@ -29,14 +22,6 @@ public class TypeScriptSensor implements Sensor {
         this.analysisRunner = new AnalysisRunnerImpl();
     }
 
-    private static Iterable<File> toFile(Iterable<InputFile> inputFiles) {
-        List<File> files = Lists.newArrayList();
-        for (InputFile inputFile : inputFiles) {
-            files.add(inputFile.file());
-        }
-        return files;
-    }
-
     public void setAnalysisRunner(AnalysisRunner runner) {
         this.analysisRunner = runner;
     }
@@ -47,8 +32,6 @@ public class TypeScriptSensor implements Sensor {
     }
 
     public void analyse(Project project, SensorContext sensorContext) {
-        Iterable<File> filesToAnalyze = GetFilesToAnalyze(this.fileSystem);
-
         File rootDir = fileSystem.baseDir();
 
         try {
@@ -58,13 +41,15 @@ public class TypeScriptSensor implements Sensor {
 
             for (AnalysisResult r : result) {
                 log.debug("Attempting to find " + r.getFileName());
-                File match = null;
+                InputFile match;
 
                 try {
-                    Iterables.find(filesToAnalyze, GetPredicateFor(r.getFileName()));
+                    match = this.fileSystem.inputFile(fileSystem.predicates().and(
+                            fileSystem.predicates().hasRelativePath(r.getFileName()),
+                            fileSystem.predicates().hasType(InputFile.Type.MAIN)));
                 }
-                catch(NoSuchElementException) {
-                    log.info("Skipping results for " + r.getFileName() + " because I couldn't find it in the files to analyze");
+                catch(NoSuchElementException nsx) {
+                    log.info("Skipping " + r.getFileName() + " because it is not included in the analysis for this project");
                     continue;
                 }
 
@@ -82,41 +67,21 @@ public class TypeScriptSensor implements Sensor {
         }
     }
 
-    private Predicate<File> GetPredicateFor(final String fileName) {
-        return new Predicate<File>() {
-            public boolean apply(@Nullable File file) {
-                assert file != null;
-                return file.getName().equals(fileName);
-            }
-        };
-    }
-
-    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, File match) {
-        InputFile file = new DefaultInputFile("someModule", match.getName());
-
+    private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, InputFile file) {
         log.debug("saving metrics for file " + analysisResult.getFileName());
 
-        Resource resource = sensorContext.getResource(file);
-
         log.debug("trying to save CoreMetrics.CLASSES");
-        sensorContext.saveMeasure(resource, CoreMetrics.CLASSES, (double) analysisResult.getNumberOfClasses());
+        sensorContext.saveMeasure(file, CoreMetrics.CLASSES, (double) analysisResult.getNumberOfClasses());
 
         log.debug("trying to save CoreMetrics.FUNCTIONS");
-        sensorContext.saveMeasure(resource, CoreMetrics.FUNCTIONS, (double) analysisResult.getNumberOfMethods());
+        sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double) analysisResult.getNumberOfMethods());
 
         log.debug("trying to save CoreMetrics.LINES");
-        sensorContext.saveMeasure(resource, CoreMetrics.LINES, (double) analysisResult.getNumberOfLines());
+        sensorContext.saveMeasure(file, CoreMetrics.LINES, (double) analysisResult.getNumberOfLines());
 
         log.debug("trying to save CoreMetrics.NCLOC with value " + analysisResult.getLinesOfCode());
-        sensorContext.saveMeasure(resource, CoreMetrics.NCLOC, (double) analysisResult.getLinesOfCode());
-
-        log.debug("measures saved");
-    }
-
-    private Iterable<File> GetFilesToAnalyze(FileSystem fs) {
-        Iterable<InputFile> files = fs.inputFiles(fs.predicates().hasLanguage(TypeScript.KEY));
-
-        return toFile(files);
+        sensorContext.saveMeasure(file, CoreMetrics.NCLOC, (double) analysisResult.getLinesOfCode());
+        log.debug("Metrics saved");
     }
 
     public String toString() {
