@@ -1,12 +1,12 @@
 package nl.codenizer.plugins.typescript;
 
 public class AnalysisResult {
-    private String FileName;
-    private int NumberOfClasses;
-    private int NumberOfMethods;
-    private int NumberOfLines;
-    private int LinesOfCode;
-    private int LinesOfComments;
+    private String FileName = null;
+    private int NumberOfClasses = 0;
+    private int NumberOfMethods = 0;
+    private int NumberOfLines = 0;
+    private int LinesOfCode = 0;
+    private int LinesOfComments = 0;
 
     public int getNumberOfClasses() {
         return this.NumberOfClasses;
