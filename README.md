@@ -12,6 +12,9 @@ Currently this plugin supports the following metrics:
 
 **Please note:** This is a work in progress so expect the metrics to change.
 
+## Current status ##
+Every release of the sonar-typescript-plugin triggers an analysis on the official [TypeScript](https://github.com/microsoft/TypeScript/) sources. Note that also whenever [tsa](http://github.com/sandermvanvliet/tsa) changes a new analysis is triggered. Latest analysis results can be found [here](http://sonar.codenizer.nl:9000/overview?id=1)
+
 ## Deploying
 Clone the sources and run `mvn clean package` and when that is successful copy the jar from the `targets` folder to `${SONAR_HOME}/extensions/plugins`
 
