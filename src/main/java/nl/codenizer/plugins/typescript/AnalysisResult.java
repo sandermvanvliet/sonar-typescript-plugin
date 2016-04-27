@@ -6,6 +6,7 @@ public class AnalysisResult {
     private int NumberOfMethods;
     private int NumberOfLines;
     private int LinesOfCode;
+    private int LinesOfComments;
 
     public int getNumberOfClasses() {
         return this.NumberOfClasses;
@@ -26,4 +27,6 @@ public class AnalysisResult {
     public int getLinesOfCode() {
         return this.LinesOfCode;
     }
+
+    public int getLinesOfComments() { return this.LinesOfComments; }
 }

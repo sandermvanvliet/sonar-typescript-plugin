@@ -70,17 +70,16 @@ public class TypeScriptSensor implements Sensor {
     private void saveCoreMetrics(SensorContext sensorContext, AnalysisResult analysisResult, InputFile file) {
         log.debug("saving metrics for file " + analysisResult.getFileName());
 
-        log.debug("trying to save CoreMetrics.CLASSES");
         sensorContext.saveMeasure(file, CoreMetrics.CLASSES, (double) analysisResult.getNumberOfClasses());
 
-        log.debug("trying to save CoreMetrics.FUNCTIONS");
         sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double) analysisResult.getNumberOfMethods());
 
-        log.debug("trying to save CoreMetrics.LINES");
         sensorContext.saveMeasure(file, CoreMetrics.LINES, (double) analysisResult.getNumberOfLines());
 
-        log.debug("trying to save CoreMetrics.NCLOC with value " + analysisResult.getLinesOfCode());
         sensorContext.saveMeasure(file, CoreMetrics.NCLOC, (double) analysisResult.getLinesOfCode());
+
+        sensorContext.saveMeasure(file, CoreMetrics.COMMENT_LINES, (double) analysisResult.getLinesOfComments());
+
         log.debug("Metrics saved");
     }
 
