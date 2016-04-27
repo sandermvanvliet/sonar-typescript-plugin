@@ -4,7 +4,6 @@ public class AnalysisResult {
     private String FileName;
     private int NumberOfClasses;
     private int NumberOfMethods;
-    private int NumberOfLines;
     private int LinesOfCode;
     private int LinesOfComments;
 
@@ -14,10 +13,6 @@ public class AnalysisResult {
 
     public int getNumberOfMethods() {
         return this.NumberOfMethods;
-    }
-
-    public int getNumberOfLines() {
-        return this.NumberOfLines;
     }
 
     public String getFileName() {

@@ -45,13 +45,6 @@ public class WhenParsingAnalysisResultsFromFileTest {
     }
     
     @Test
-    public void GivenAValidFileThenTheNumberOfLinesIsSet() {
-        AnalysisResult result = ParseFromFile();
-        
-        assertThat(result.getNumberOfLines()).isEqualTo(4567);
-    }
-    
-    @Test
     public void GivenAValidFileThenTheLinesOfCodeIsSet() {
         AnalysisResult result = ParseFromFile();
         

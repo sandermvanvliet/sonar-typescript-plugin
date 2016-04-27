@@ -74,8 +74,6 @@ public class TypeScriptSensor implements Sensor {
 
         sensorContext.saveMeasure(file, CoreMetrics.FUNCTIONS, (double) analysisResult.getNumberOfMethods());
 
-        sensorContext.saveMeasure(file, CoreMetrics.LINES, (double) analysisResult.getNumberOfLines());
-
         sensorContext.saveMeasure(file, CoreMetrics.NCLOC, (double) analysisResult.getLinesOfCode());
 
         sensorContext.saveMeasure(file, CoreMetrics.COMMENT_LINES, (double) analysisResult.getLinesOfComments());
